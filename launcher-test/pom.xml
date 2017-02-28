@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>net.mfjassociates.boot</groupId>
+  <artifactId>test-launcher</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>1.5.1.RELEASE</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+						<configuration>
+							<layoutFactory implementation="net.mfjassociates.boot.launcher.OrderedLayoutFactory">
+								<!-- Create the JAR name from the first plugin's first dependency-->
+								<customLauncherPath>${project.build.plugins[0].dependencies[0].artifactId}-${project.build.plugins[0].dependencies[0].version}.jar</customLauncherPath>
+							</layoutFactory>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>net.mfjassociates.boot</groupId>
+						<artifactId>spring-boot-ordered-launcher</artifactId>
+						<version>0.0.1-SNAPSHOT</version>
+					</dependency>
+					<dependency>
+						<groupId>net.mfjassociates.boot</groupId>
+						<artifactId>spring-boot-ordered-launcher</artifactId>
+						<version>0.0.1-SNAPSHOT</version>
+						<classifier>embedded</classifier>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>net.mfjassociates.boot</groupId>
+			<artifactId>spring-boot-ordered-launcher</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-loader-tools</artifactId>
+			<version>1.5.1.RELEASE</version>
+		</dependency>
+	</dependencies>
+</project>
